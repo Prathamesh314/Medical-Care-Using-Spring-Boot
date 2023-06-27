@@ -1,25 +1,21 @@
-package com.medicare.ProjectforMedical.Model;
+package com.medicare.ProjectforMedical.Dto;
 
-import jakarta.persistence.*;
+import com.medicare.ProjectforMedical.Model.Category;
+import com.medicare.ProjectforMedical.Model.User;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Medicine {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+public class MedicineRequest {
     private String name;
     private String image;
     private int numOfMeds;
-    @OneToOne
     private Category category;
-    @ManyToOne
     private User user;
 }

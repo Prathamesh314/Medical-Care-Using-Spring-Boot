@@ -22,4 +22,6 @@ public class User {
     private int age;
     private String name;
     private String address;
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Medicine> medicines = new ArrayList<>();
 }
