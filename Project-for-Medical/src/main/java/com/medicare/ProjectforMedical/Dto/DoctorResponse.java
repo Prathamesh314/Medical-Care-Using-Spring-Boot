@@ -14,5 +14,5 @@ public class DoctorResponse {
     private String name;
     private String image;
     private String speciality;
-    private int YearsofExp;
+    private int yearsOfExp;
 }

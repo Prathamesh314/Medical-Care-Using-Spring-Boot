@@ -4,8 +4,10 @@ import com.medicare.ProjectforMedical.Dto.DoctorResponse;
 import com.medicare.ProjectforMedical.Dto.UserRequest;
 import com.medicare.ProjectforMedical.Dto.UserResponse;
 import com.medicare.ProjectforMedical.Model.Doctor;
+import com.medicare.ProjectforMedical.Model.Medicine;
 import com.medicare.ProjectforMedical.Model.User;
 import com.medicare.ProjectforMedical.Repository.DoctorRepository;
+import com.medicare.ProjectforMedical.Repository.MedicineRepository;
 import com.medicare.ProjectforMedical.Repository.UserRepository;
 import com.medicare.ProjectforMedical.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final DoctorRepository doctorRepository;
+    private final MedicineRepository medicineRepository;
 
     public void createUser(UserRequest userRequest,Integer docID){
         Doctor doctor = doctorRepository.findById(docID).orElseThrow(()->new ResourceNotFoundException("Doctor","ID",docID));
@@ -66,7 +69,7 @@ public class UserService {
                 .name(user.getName())
                 .address(user.getAddress())
                 .age(user.getAge())
-                .doctorResponse(MapToDocResponse(user.getDoctor()))
+                .doctor(MapToDocResponse(user.getDoctor()))
                 .build();
     }
 
@@ -76,7 +79,7 @@ public class UserService {
                 .name(doctor.getName())
                 .image(doctor.getImage())
                 .speciality(doctor.getSpeciality())
-                .YearsofExp(doctor.getYearsofExp())
+                .yearsOfExp(doctor.getYearsofExp())
                 .build();
     }
 

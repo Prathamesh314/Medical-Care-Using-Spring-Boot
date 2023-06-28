@@ -14,5 +14,5 @@ public class UserResponse {
     private int age;
     private String name;
     private String address;
-    private DoctorResponse doctorResponse;
+    private DoctorResponse doctor;
 }

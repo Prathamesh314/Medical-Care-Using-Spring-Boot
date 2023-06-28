@@ -24,7 +24,7 @@ public class DoctorService {
                 .name(doctorRequest.getName())
                 .speciality(doctorRequest.getSpeciality())
                 .image(doctorRequest.getImage())
-                .YearsofExp(doctorRequest.getYearsofExp())
+                .YearsofExp(doctorRequest.getYearsOfExp())
                 .build();
 
         doctorRepository.save(doctor);
@@ -45,7 +45,7 @@ public class DoctorService {
         doctor.setName(doctorRequest.getName());
         doctor.setImage(doctorRequest.getImage());
         doctor.setSpeciality(doctorRequest.getSpeciality());
-        doctor.setYearsofExp(doctorRequest.getYearsofExp());
+        doctor.setYearsofExp(doctorRequest.getYearsOfExp());
         doctorRepository.save(doctor);
     }
 
@@ -59,7 +59,7 @@ public class DoctorService {
                 .name(doctor.getName())
                 .image(doctor.getImage())
                 .speciality(doctor.getSpeciality())
-                .YearsofExp(doctor.getYearsofExp())
+                .yearsOfExp(doctor.getYearsofExp())
                 .build();
     }
 
