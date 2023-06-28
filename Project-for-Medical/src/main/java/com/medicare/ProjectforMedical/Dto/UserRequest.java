@@ -1,5 +1,6 @@
 package com.medicare.ProjectforMedical.Dto;
 
+import com.medicare.ProjectforMedical.Model.Doctor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

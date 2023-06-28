@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponse {
-    private int id;
-    private int age;
+public class DoctorRequest {
     private String name;
-    private String address;
-    private DoctorResponse doctorResponse;
+    private String image;
+    private String speciality;
+    private int YearsofExp;
 }

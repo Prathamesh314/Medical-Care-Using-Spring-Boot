@@ -24,4 +24,6 @@ public class User {
     private String address;
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Medicine> medicines = new ArrayList<>();
+    @ManyToOne
+    private Doctor doctor;
 }

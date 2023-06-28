@@ -1,11 +1,15 @@
 package com.medicare.ProjectforMedical.Service;
 
+import com.medicare.ProjectforMedical.Dto.DoctorResponse;
 import com.medicare.ProjectforMedical.Dto.UserRequest;
 import com.medicare.ProjectforMedical.Dto.UserResponse;
+import com.medicare.ProjectforMedical.Model.Doctor;
 import com.medicare.ProjectforMedical.Model.User;
+import com.medicare.ProjectforMedical.Repository.DoctorRepository;
 import com.medicare.ProjectforMedical.Repository.UserRepository;
 import com.medicare.ProjectforMedical.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.id.IntegralDataTypeHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,12 +19,15 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final DoctorRepository doctorRepository;
 
-    public void createUser(UserRequest userRequest){
+    public void createUser(UserRequest userRequest,Integer docID){
+        Doctor doctor = doctorRepository.findById(docID).orElseThrow(()->new ResourceNotFoundException("Doctor","ID",docID));
         User user = User.builder()
                 .age(userRequest.getAge())
                 .name(userRequest.getName())
                 .address(userRequest.getAddress())
+                .doctor(doctor)
                 .build();
 
         userRepository.save(user);
@@ -33,6 +40,12 @@ public class UserService {
     public UserResponse getUserById(Integer id) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User","ID",id));
         return MapToResponse(user);
+    }
+
+    public List<UserResponse> getUserByDocID(Integer docID){
+        Doctor doctor = doctorRepository.findById(docID).orElseThrow(()-> new ResourceNotFoundException("Doctor","ID",docID));
+        List<User> users = userRepository.findByDoctor(doctor);
+        return users.stream().map(this::MapToResponse).toList();
     }
 
     public void updateUser(UserRequest userRequest,Integer id){
@@ -53,6 +66,17 @@ public class UserService {
                 .name(user.getName())
                 .address(user.getAddress())
                 .age(user.getAge())
+                .doctorResponse(MapToDocResponse(user.getDoctor()))
+                .build();
+    }
+
+    private DoctorResponse MapToDocResponse(Doctor doctor) {
+        return DoctorResponse.builder()
+                .id(doctor.getId())
+                .name(doctor.getName())
+                .image(doctor.getImage())
+                .speciality(doctor.getSpeciality())
+                .YearsofExp(doctor.getYearsofExp())
                 .build();
     }
 

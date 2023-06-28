@@ -17,10 +17,10 @@ public class UserController {
     private final UserService userService;
 
     // create
-    @PostMapping("/")
+    @PostMapping("/doctor/{docID}")
     @ResponseStatus(HttpStatus.CREATED)
-    public String createUser(@RequestBody UserRequest userRequest){
-        userService.createUser(userRequest);
+    public String createUser(@RequestBody UserRequest userRequest,@PathVariable Integer docID){
+        userService.createUser(userRequest,docID);
         return "User is created successfully";
     }
 
@@ -37,6 +37,11 @@ public class UserController {
         return userService.getUserById(userID);
     }
 
+    @GetMapping("/doctor/{docID}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserResponse> getUserByDoc(@PathVariable Integer docID){
+        return userService.getUserByDocID(docID);
+    }
     // put
 
     @PutMapping("/{userId}")
