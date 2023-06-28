@@ -1,10 +1,13 @@
 package com.medicare.ProjectforMedical.Service;
 
+import com.medicare.ProjectforMedical.Dto.CategoryResponse;
 import com.medicare.ProjectforMedical.Dto.MedicineRequest;
 import com.medicare.ProjectforMedical.Dto.MedicineResponse;
 import com.medicare.ProjectforMedical.Dto.UserResponse;
+import com.medicare.ProjectforMedical.Model.Category;
 import com.medicare.ProjectforMedical.Model.Medicine;
 import com.medicare.ProjectforMedical.Model.User;
+import com.medicare.ProjectforMedical.Repository.CategoryRepository;
 import com.medicare.ProjectforMedical.Repository.MedicineRepository;
 import com.medicare.ProjectforMedical.Repository.UserRepository;
 import com.medicare.ProjectforMedical.exception.ResourceNotFoundException;
@@ -22,14 +25,16 @@ public class MedicineService {
 
     private final MedicineRepository medicineRepository;
     private final UserRepository userRepository;
+    private final CategoryRepository categoryRepository;
 
-    public void createMedicine(MedicineRequest medicineRequest,int userID){
+    public void createMedicine(MedicineRequest medicineRequest,int userID,int categoryID){
         User user = userRepository.findById(userID).orElseThrow(()->new ResourceNotFoundException("User","ID",userID));
+        Category category = categoryRepository.findById(categoryID).orElseThrow(()->new ResourceNotFoundException("Category","ID",categoryID));
         Medicine medicine = Medicine.builder()
                 .name(medicineRequest.getName())
                 .image(medicineRequest.getImage())
-                .category(medicineRequest.getCategory())
                 .user(user)
+                .category(category)
                 .numOfMeds(medicineRequest.getNumOfMeds())
                 .build();
         medicineRepository.save(medicine);
@@ -40,12 +45,41 @@ public class MedicineService {
         return medicineRepository.findAll().stream().map(this::MapToResponse).toList();
     }
 
+    public MedicineResponse getMedById(int medID){
+        Medicine medicine = medicineRepository.findById(medID).orElseThrow(()->new ResourceNotFoundException("Medicine","ID",medID));
+        return MapToResponse(medicine);
+    }
+
+    public List<MedicineResponse> getMedByUser(int userID){
+        User user = userRepository.findById(userID).orElseThrow(()->new ResourceNotFoundException("User","ID",userID));
+        List<Medicine> medicines = medicineRepository.findByUser(user);
+        return medicines.stream().map(this::MapToResponse).toList();
+    }
+
+    public List<MedicineResponse> getMedByCategory(int categoryID){
+        Category category = categoryRepository.findById(categoryID).orElseThrow(()->new ResourceNotFoundException("Category","ID",categoryID));
+        List<Medicine> medicines = medicineRepository.findByCategory(category);
+        return medicines.stream().map(this::MapToResponse).toList();
+    }
+
+    public void updateMedicine(MedicineRequest medicineRequest,int medID){
+        Medicine medicine = medicineRepository.findById(medID).orElseThrow(()->new ResourceNotFoundException("Medicine","ID",medID));
+        medicine.setName(medicineRequest.getName());
+        medicine.setNumOfMeds(medicineRequest.getNumOfMeds());
+        medicine.setImage(medicineRequest.getImage());
+        medicineRepository.save(medicine);
+    }
+
+    public void deleteById(int medID){
+        medicineRepository.deleteById(medID);
+    }
+
     private MedicineResponse MapToResponse(Medicine medicine) {
         return MedicineResponse.builder()
                 .name(medicine.getName())
                 .image(medicine.getImage())
                 .numOfMeds(medicine.getNumOfMeds())
-                .category(medicine.getCategory())
+                .category(MapToCatResponse(medicine.getCategory()))
                 .user(MapToUserResponse(medicine.getUser()))
                 .build();
     }
@@ -56,6 +90,14 @@ public class MedicineService {
                 .name(user.getName())
                 .address(user.getAddress())
                 .age(user.getAge())
+                .build();
+    }
+
+    private CategoryResponse MapToCatResponse(Category category){
+        return CategoryResponse.builder()
+                .id(category.getId())
+                .name(category.getName())
+                .description(category.getDescription())
                 .build();
     }
 

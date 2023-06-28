@@ -15,10 +15,12 @@ import lombok.NoArgsConstructor;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private int id;
     private String name;
     private String description;
     @OneToOne(mappedBy = "category")
+    @PrimaryKeyJoinColumn
     private Medicine medicines;
 
 }

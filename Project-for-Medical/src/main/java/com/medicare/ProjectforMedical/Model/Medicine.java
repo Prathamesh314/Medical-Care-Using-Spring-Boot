@@ -19,6 +19,8 @@ public class Medicine {
     private String image;
     private int numOfMeds;
     @OneToOne
+    @MapsId
+    @JoinColumn(name = "category_id",referencedColumnName = "id")
     private Category category;
     @ManyToOne
     private User user;
