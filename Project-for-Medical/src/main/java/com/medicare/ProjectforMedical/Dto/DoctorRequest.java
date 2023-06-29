@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -13,6 +15,6 @@ public class DoctorRequest {
     private String name;
     private String image;
     private String speciality;
-    private int YearsOfExp;
+    private BigDecimal YearsOfExp;
 
 }

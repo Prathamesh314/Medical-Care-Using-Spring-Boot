@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -21,7 +22,7 @@ public class Doctor {
     private String name;
     private String image;
     private String speciality;
-    private int YearsofExp;
+    private BigDecimal YearsofExp;
     @OneToMany(mappedBy = "doctor")
     private List<User> userList;
 }

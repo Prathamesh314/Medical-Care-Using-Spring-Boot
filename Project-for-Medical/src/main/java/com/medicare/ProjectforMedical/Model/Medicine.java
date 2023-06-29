@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Entity
 @Data
 @Builder
@@ -17,7 +19,8 @@ public class Medicine {
     private int id;
     private String name;
     private String image;
-    private int numOfMeds;
+    private BigDecimal numOfMeds;
+    private String Time;
     @OneToOne
     @MapsId
     @JoinColumn(name = "category_id",referencedColumnName = "id")

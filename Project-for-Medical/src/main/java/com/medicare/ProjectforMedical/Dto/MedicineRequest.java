@@ -16,4 +16,5 @@ public class MedicineRequest {
     private String name;
     private String image;
     private int numOfMeds;
+    private String Time;
 }

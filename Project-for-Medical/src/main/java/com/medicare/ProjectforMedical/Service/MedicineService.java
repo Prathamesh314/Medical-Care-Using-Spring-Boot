@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.security.cert.CertPathBuilder;
 import java.util.List;
 
@@ -33,9 +34,10 @@ public class MedicineService {
         Medicine medicine = Medicine.builder()
                 .name(medicineRequest.getName())
                 .image(medicineRequest.getImage())
+                .Time(medicineRequest.getTime())
                 .user(user)
                 .category(category)
-                .numOfMeds(medicineRequest.getNumOfMeds())
+                .numOfMeds(BigDecimal.valueOf(medicineRequest.getNumOfMeds()))
                 .build();
         medicineRepository.save(medicine);
         log.info("Medicine is saved");
@@ -65,8 +67,9 @@ public class MedicineService {
     public void updateMedicine(MedicineRequest medicineRequest,int medID){
         Medicine medicine = medicineRepository.findById(medID).orElseThrow(()->new ResourceNotFoundException("Medicine","ID",medID));
         medicine.setName(medicineRequest.getName());
-        medicine.setNumOfMeds(medicineRequest.getNumOfMeds());
+        medicine.setNumOfMeds(BigDecimal.valueOf(medicineRequest.getNumOfMeds()));
         medicine.setImage(medicineRequest.getImage());
+        medicine.setTime(medicineRequest.getTime());
         medicineRepository.save(medicine);
     }
 
@@ -78,6 +81,7 @@ public class MedicineService {
         return MedicineResponse.builder()
                 .name(medicine.getName())
                 .image(medicine.getImage())
+                .Time(medicine.getTime())
                 .numOfMeds(medicine.getNumOfMeds())
                 .category(MapToCatResponse(medicine.getCategory()))
                 .user(MapToUserResponse(medicine.getUser()))

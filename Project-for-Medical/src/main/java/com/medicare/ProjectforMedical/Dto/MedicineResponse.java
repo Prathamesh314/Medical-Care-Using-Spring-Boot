@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -14,7 +16,8 @@ public class MedicineResponse {
     private int id;
     private String name;
     private String image;
-    private int numOfMeds;
+    private BigDecimal numOfMeds;
+    private String Time;
     private CategoryResponse category;
     private UserResponse user;
 }
