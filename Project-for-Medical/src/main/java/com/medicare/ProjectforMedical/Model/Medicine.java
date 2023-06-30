@@ -21,6 +21,8 @@ public class Medicine {
     private String name;
     private String image;
     private BigDecimal numOfMeds;
+    private String medToTakeAtATime;
+    private long price;
     private String time;
     @OneToOne
     @MapsId

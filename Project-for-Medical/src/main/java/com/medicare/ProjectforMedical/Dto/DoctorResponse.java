@@ -19,5 +19,4 @@ public class DoctorResponse {
     private String image;
     private String speciality;
     private long experience;
-    private Set<UserResponse> users = new HashSet<>();
 }

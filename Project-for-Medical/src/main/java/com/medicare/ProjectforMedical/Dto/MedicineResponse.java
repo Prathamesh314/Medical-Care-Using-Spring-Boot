@@ -19,6 +19,8 @@ public class MedicineResponse {
     private String image;
     private BigDecimal numOfMeds;
     private String time;
+    private String medToTake;
+    private long price;
     private CategoryResponse category;
     private UserResponse user;
 }

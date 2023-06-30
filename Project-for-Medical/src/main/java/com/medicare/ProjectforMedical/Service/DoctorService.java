@@ -2,7 +2,9 @@ package com.medicare.ProjectforMedical.Service;
 
 import com.medicare.ProjectforMedical.Dto.DoctorRequest;
 import com.medicare.ProjectforMedical.Dto.DoctorResponse;
+import com.medicare.ProjectforMedical.Dto.UserResponse;
 import com.medicare.ProjectforMedical.Model.Doctor;
+import com.medicare.ProjectforMedical.Model.User;
 import com.medicare.ProjectforMedical.Repository.DoctorRepository;
 import com.medicare.ProjectforMedical.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -63,5 +66,6 @@ public class DoctorService {
                 .experience(doctor.getExperience())
                 .build();
     }
+
 
 }

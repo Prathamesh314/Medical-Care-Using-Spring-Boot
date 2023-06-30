@@ -33,6 +33,8 @@ public class MedicineService {
                 .name(medicineRequest.getName())
                 .image(medicineRequest.getImage())
                 .time(medicineRequest.getTime())
+                .medToTakeAtATime(medicineRequest.getMedToTake())
+                .price(medicineRequest.getPrice())
                 .user(user)
                 .category(category)
                 .numOfMeds(BigDecimal.valueOf(medicineRequest.getNumOfMeds()))
@@ -82,6 +84,7 @@ public class MedicineService {
                 .image(medicine.getImage())
                 .time(medicine.getTime())
                 .numOfMeds(medicine.getNumOfMeds())
+                .medToTake(medicine.getMedToTakeAtATime())
                 .category(MapToCatResponse(medicine.getCategory()))
                 .user(MapToUserResponse(medicine.getUser()))
                 .build();
