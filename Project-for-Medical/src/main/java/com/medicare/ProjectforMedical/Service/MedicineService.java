@@ -1,10 +1,8 @@
 package com.medicare.ProjectforMedical.Service;
 
-import com.medicare.ProjectforMedical.Dto.CategoryResponse;
-import com.medicare.ProjectforMedical.Dto.MedicineRequest;
-import com.medicare.ProjectforMedical.Dto.MedicineResponse;
-import com.medicare.ProjectforMedical.Dto.UserResponse;
+import com.medicare.ProjectforMedical.Dto.*;
 import com.medicare.ProjectforMedical.Model.Category;
+import com.medicare.ProjectforMedical.Model.Doctor;
 import com.medicare.ProjectforMedical.Model.Medicine;
 import com.medicare.ProjectforMedical.Model.User;
 import com.medicare.ProjectforMedical.Repository.CategoryRepository;
@@ -79,6 +77,7 @@ public class MedicineService {
 
     private MedicineResponse MapToResponse(Medicine medicine) {
         return MedicineResponse.builder()
+                .id(medicine.getId())
                 .name(medicine.getName())
                 .image(medicine.getImage())
                 .time(medicine.getTime())
@@ -94,6 +93,16 @@ public class MedicineService {
                 .name(user.getName())
                 .address(user.getAddress())
                 .age(user.getAge())
+                .doctor(MapToDocResponse(user.getDoctor()))
+                .build();
+    }
+
+    private DoctorResponse MapToDocResponse(Doctor doctor){
+        return DoctorResponse.builder()
+                .id(doctor.getId())
+                .name(doctor.getName())
+                .image(doctor.getImage())
+                .speciality(doctor.getSpeciality())
                 .build();
     }
 
