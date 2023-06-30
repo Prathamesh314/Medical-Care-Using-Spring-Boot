@@ -22,7 +22,6 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final DoctorRepository doctorRepository;
-    private final MedicineRepository medicineRepository;
 
     public void createUser(UserRequest userRequest,Integer docID){
         Doctor doctor = doctorRepository.findById(docID).orElseThrow(()->new ResourceNotFoundException("Doctor","ID",docID));
@@ -79,7 +78,7 @@ public class UserService {
                 .name(doctor.getName())
                 .image(doctor.getImage())
                 .speciality(doctor.getSpeciality())
-                .yearsOfExp(doctor.getYearsofExp())
+                .experience(doctor.getExperience())
                 .build();
     }
 

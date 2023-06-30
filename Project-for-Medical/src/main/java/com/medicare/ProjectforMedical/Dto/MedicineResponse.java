@@ -17,7 +17,7 @@ public class MedicineResponse {
     private String name;
     private String image;
     private BigDecimal numOfMeds;
-    private String Time;
+    private String time;
     private CategoryResponse category;
     private UserResponse user;
 }

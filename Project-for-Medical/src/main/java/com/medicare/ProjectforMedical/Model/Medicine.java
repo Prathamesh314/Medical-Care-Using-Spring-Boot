@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "t_medicines")
 @Data
 @Builder
 @AllArgsConstructor
@@ -20,7 +21,7 @@ public class Medicine {
     private String name;
     private String image;
     private BigDecimal numOfMeds;
-    private String Time;
+    private String time;
     @OneToOne
     @MapsId
     @JoinColumn(name = "category_id",referencedColumnName = "id")

@@ -15,6 +15,6 @@ public class DoctorRequest {
     private String name;
     private String image;
     private String speciality;
-    private BigDecimal YearsOfExp;
+    private long experience;
 
 }

@@ -19,7 +19,7 @@ public class UserController {
     // create
     @PostMapping("/doctor/{docID}")
     @ResponseStatus(HttpStatus.CREATED)
-    public String createUser(@RequestBody UserRequest userRequest,@PathVariable Integer docID){
+    public String createUser(@RequestBody UserRequest userRequest,@PathVariable int docID){
         userService.createUser(userRequest,docID);
         return "User is created successfully";
     }
@@ -39,7 +39,7 @@ public class UserController {
 
     @GetMapping("/doctor/{docID}")
     @ResponseStatus(HttpStatus.OK)
-    public List<UserResponse> getUserByDoc(@PathVariable Integer docID){
+    public List<UserResponse> getUserByDoc(@PathVariable int docID){
         return userService.getUserByDocID(docID);
     }
     // put

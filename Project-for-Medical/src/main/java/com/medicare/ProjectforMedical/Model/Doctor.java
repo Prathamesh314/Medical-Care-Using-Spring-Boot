@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "t_doctor")
@@ -22,7 +23,7 @@ public class Doctor {
     private String name;
     private String image;
     private String speciality;
-    private BigDecimal YearsofExp;
+    private long experience;
     @OneToMany(mappedBy = "doctor")
-    private List<User> userList;
+    private Set<User> userList;
 }

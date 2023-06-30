@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Builder
@@ -16,5 +18,6 @@ public class DoctorResponse {
     private String name;
     private String image;
     private String speciality;
-    private BigDecimal yearsOfExp;
+    private long experience;
+    private Set<UserResponse> users = new HashSet<>();
 }
