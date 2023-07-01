@@ -66,6 +66,4 @@ public class DoctorService {
                 .experience(doctor.getExperience())
                 .build();
     }
-
-
 }
