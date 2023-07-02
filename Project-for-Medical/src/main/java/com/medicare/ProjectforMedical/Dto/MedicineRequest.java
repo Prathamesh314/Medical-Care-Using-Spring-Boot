@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 public class MedicineRequest {
     private String name;
     private String image;
-    private int numOfMeds;
+    private BigDecimal numOfMeds;
     private String Time;
     private String medToTake;
     private long price;

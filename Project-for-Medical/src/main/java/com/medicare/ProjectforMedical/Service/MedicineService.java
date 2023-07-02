@@ -37,7 +37,7 @@ public class MedicineService {
                 .price(medicineRequest.getPrice())
                 .user(user)
                 .category(category)
-                .numOfMeds(BigDecimal.valueOf(medicineRequest.getNumOfMeds()))
+                .numOfMeds(medicineRequest.getNumOfMeds())
                 .build();
         medicineRepository.save(medicine);
         log.info("Medicine is saved");
@@ -67,7 +67,7 @@ public class MedicineService {
     public void updateMedicine(MedicineRequest medicineRequest,int medID){
         Medicine medicine = medicineRepository.findById(medID).orElseThrow(()->new ResourceNotFoundException("Medicine","ID",medID));
         medicine.setName(medicineRequest.getName());
-        medicine.setNumOfMeds(BigDecimal.valueOf(medicineRequest.getNumOfMeds()));
+        medicine.setNumOfMeds(medicineRequest.getNumOfMeds());
         medicine.setImage(medicineRequest.getImage());
         medicine.setTime(medicineRequest.getTime());
         medicineRepository.save(medicine);
