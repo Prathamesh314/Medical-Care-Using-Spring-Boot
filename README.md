@@ -12,4 +12,4 @@
 2. ###### Information of Medicine that we have to give to a user, info like when to take [Day,Afternoon,Night], how much to take, name of medicine etc
 3. ###### Information of Doctor, like which doctor recommended which medicine
 
-###### You can also upload image of medicine from your device or online, so that if want to go purchase a new one, then it will be easy for people to take correct medicine
+###### You can also upload an image of medicine from your device or online, so that if want to go purchase a new one, then it will be easy for people to buy correct medicine
