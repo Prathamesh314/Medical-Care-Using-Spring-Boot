@@ -7,6 +7,7 @@ import com.medicare.ProjectforMedical.Model.User;
 import com.medicare.ProjectforMedical.Repository.UserRepository;
 import com.medicare.ProjectforMedical.Service.AppointmentService;
 import com.medicare.ProjectforMedical.Service.DoctorService;
+import com.medicare.ProjectforMedical.Service.EmailService;
 import com.medicare.ProjectforMedical.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ public class UserController {
     private final DoctorService doctorService;
     private final UserRepository userRepository;
     private final AppointmentService appointmentService;
+    private final EmailService emailService;
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
@@ -35,6 +37,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public String addAppointment(@RequestBody AppointmentRequest appointmentRequest,@PathVariable Integer docID,@PathVariable Integer userID){
         appointmentService.createAppointment(appointmentRequest,userID,docID);
+        emailService.sendMail("Appointment","generaladnan139@gmail.com","Prathamesh",appointmentRequest.getReason());
         return "Appointment created";
     }
 

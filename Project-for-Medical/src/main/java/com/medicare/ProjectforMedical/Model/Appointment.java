@@ -25,7 +25,6 @@ public class Appointment {
     private String email;
     @ManyToOne
     private User user;
-    @NotBlank
     private Date date;
 
 }
