@@ -1,6 +1,8 @@
 package com.medicare.ProjectforMedical.Model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +23,8 @@ public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @NotBlank
+    @Size(min = 3,max = 12,message = "Name should be of 3-12 characters")
     private String name;
     private String image;
     private String speciality;
