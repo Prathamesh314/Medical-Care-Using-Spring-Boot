@@ -1,5 +1,6 @@
 package com.medicare.ProjectforMedical.Dto;
 
+import com.medicare.ProjectforMedical.Model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,10 +13,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AppointmentResponse {
-
     private int id;
     private String reason;
-    private Date time;
     private UserResponse user;
-
+    private Date date;
 }

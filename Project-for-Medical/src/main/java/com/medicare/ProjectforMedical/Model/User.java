@@ -22,8 +22,12 @@ public class User {
     private int age;
     private String name;
     private String address;
+    private String email;
+    private String password;
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Medicine> medicines = new ArrayList<>();
     @ManyToOne
     private Doctor doctor;
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Appointment> appointmentList = new ArrayList<>();
 }

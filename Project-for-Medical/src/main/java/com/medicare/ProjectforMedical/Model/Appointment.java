@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.aspectj.weaver.GeneratedReferenceTypeDelegate;
 
 import java.util.Date;
 
@@ -14,11 +15,13 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Appointment {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private Date time;
     private String reason;
+    private String email;
+    @ManyToOne
     private User user;
+    private Date date;
+
 }

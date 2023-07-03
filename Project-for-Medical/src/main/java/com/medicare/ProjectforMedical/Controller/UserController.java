@@ -1,7 +1,12 @@
 package com.medicare.ProjectforMedical.Controller;
 
-import com.medicare.ProjectforMedical.Dto.UserRequest;
-import com.medicare.ProjectforMedical.Dto.UserResponse;
+import com.medicare.ProjectforMedical.Dto.*;
+import com.medicare.ProjectforMedical.Model.Appointment;
+import com.medicare.ProjectforMedical.Model.Doctor;
+import com.medicare.ProjectforMedical.Model.User;
+import com.medicare.ProjectforMedical.Repository.UserRepository;
+import com.medicare.ProjectforMedical.Service.AppointmentService;
+import com.medicare.ProjectforMedical.Service.DoctorService;
 import com.medicare.ProjectforMedical.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,13 +20,45 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final DoctorService doctorService;
+    private final UserRepository userRepository;
+    private final AppointmentService appointmentService;
 
-    // create
-    @PostMapping("/doctor/{docID}")
+    @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public String createUser(@RequestBody UserRequest userRequest,@PathVariable int docID){
-        userService.createUser(userRequest,docID);
-        return "User is created successfully";
+    public String addUser(@RequestBody UserRequest userRequest){
+        userService.addUser(userRequest);
+        return "User added successfully";
+    }
+
+    @PostMapping("/{userID}/doctor/{docID}/appointment")
+    @ResponseStatus(HttpStatus.OK)
+    public String addAppointment(@RequestBody AppointmentRequest appointmentRequest,@PathVariable Integer docID,@PathVariable Integer userID){
+        appointmentService.createAppointment(appointmentRequest,userID,docID);
+        return "Appointment created";
+    }
+
+
+    private User MapToUser(UserResponse userResponse) {
+        return User.builder()
+                .name(userResponse.getName())
+                .address(userResponse.getAddress())
+                .age(userResponse.getAge())
+                .email(userResponse.getEmail())
+                .password(userResponse.getPassword())
+                .doctor(MapToDoctor(userResponse.getDoctor()))
+                .build();
+    }
+
+
+    private Doctor MapToDoctor(DoctorResponse doctor) {
+        return Doctor.builder()
+                .id(doctor.getId())
+                .image(doctor.getImage())
+                .name(doctor.getName())
+                .speciality(doctor.getSpeciality())
+                .experience(doctor.getExperience())
+                .build();
     }
 
     // get
@@ -37,11 +74,13 @@ public class UserController {
         return userService.getUserById(userID);
     }
 
-    @GetMapping("/doctor/{docID}")
+
+    @GetMapping("/appointment")
     @ResponseStatus(HttpStatus.OK)
-    public List<UserResponse> getUserByDoc(@PathVariable int docID){
-        return userService.getUserByDocID(docID);
+    public List<AppointmentResponse> getAllAppointments(){
+        return appointmentService.getAllAppointments();
     }
+
     // put
 
     @PutMapping("/{userId}")
@@ -51,12 +90,26 @@ public class UserController {
         return ("User with ID" + userId + " has been Updated Successfully");
     }
 
+    @PutMapping("/{appointmentID}")
+    @ResponseStatus(HttpStatus.OK)
+    public String updateAppointment(@RequestBody AppointmentRequest appointmentRequest,@PathVariable Integer appointmentID){
+        appointmentService.updateAppointment(appointmentRequest,appointmentID);
+        return "Appointment updated successfully";
+    }
+
     // delete
     @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public String deleteUser(@PathVariable Integer userId){
         userService.deleteUser(userId);
         return "User has been deleted";
+    }
+
+    @DeleteMapping("/{appointmentID}")
+    @ResponseStatus(HttpStatus.OK)
+    public String deleteAppointment(@PathVariable Integer appointmentID){
+        appointmentService.deleteAppointment(appointmentID);
+        return "Appointment deleted successfully";
     }
 
 }

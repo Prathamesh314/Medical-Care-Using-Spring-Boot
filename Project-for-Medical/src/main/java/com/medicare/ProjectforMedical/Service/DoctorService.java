@@ -44,6 +44,11 @@ public class DoctorService {
         return MapToResponse(doctor);
     }
 
+    public DoctorResponse findBySpeciality(String speciality){
+        Doctor doctor = doctorRepository.findBySpeciality(speciality);
+        return MapToResponse(doctor);
+    }
+
     public void updateDoc(DoctorRequest doctorRequest,Integer docID){
         Doctor doctor = doctorRepository.findById(docID).orElseThrow(()->new ResourceNotFoundException("Doctor","ID",docID));
         doctor.setName(doctorRequest.getName());
