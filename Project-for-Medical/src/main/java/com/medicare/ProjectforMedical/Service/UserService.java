@@ -33,20 +33,7 @@ public class UserService {
                 .build();
         userRepository.save(user);
     }
-
-//    public void createUser(UserRequest userRequest,Integer docID){
-//        Doctor doctor = doctorRepository.findById(docID).orElseThrow(()->new ResourceNotFoundException("Doctor","ID",docID));
-//        User user = User.builder()
-//                .age(userRequest.getAge())
-//                .name(userRequest.getName())
-//                .address(userRequest.getAddress())
-//                .email(userRequest.getEmail())
-//                .password(userRequest.getPassword())
-//                .doctor(doctor)
-//                .build();
-//
-//        userRepository.save(user);
-//    }
+    
 
     public UserResponse findByEmail(String email){
         User user = userRepository.findByEmail(email);
@@ -62,11 +49,11 @@ public class UserService {
         return MapToResponse(user);
     }
 
-//    public List<UserResponse> getUserByDocID(Integer docID){
-//        Doctor doctor = doctorRepository.findById(docID).orElseThrow(()-> new ResourceNotFoundException("Doctor","ID",docID));
-//        List<User> users = userRepository.findByDoctor(doctor);
-//        return users.stream().map(this::MapToResponse).toList();
-//    }
+    public List<UserResponse> getUserByDoc(Integer docID){
+        Doctor doctor = doctorRepository.findById(docID).orElseThrow(()-> new ResourceNotFoundException("Doctor","ID",docID));
+        List<User> users = userRepository.findByDoctor(doctor);
+        return users.stream().map(this::MapToResponse).toList();
+    }
 
     public void updateUser(UserRequest userRequest,Integer id){
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User","ID",id));

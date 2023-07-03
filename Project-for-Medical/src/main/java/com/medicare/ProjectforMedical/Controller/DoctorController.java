@@ -1,7 +1,10 @@
 package com.medicare.ProjectforMedical.Controller;
 
+import com.medicare.ProjectforMedical.Dto.AppointmentResponse;
 import com.medicare.ProjectforMedical.Dto.DoctorRequest;
 import com.medicare.ProjectforMedical.Dto.DoctorResponse;
+import com.medicare.ProjectforMedical.Model.Doctor;
+import com.medicare.ProjectforMedical.Service.AppointmentService;
 import com.medicare.ProjectforMedical.Service.DoctorService;
 import com.medicare.ProjectforMedical.Service.FileService;
 import jakarta.servlet.http.HttpServletResponse;

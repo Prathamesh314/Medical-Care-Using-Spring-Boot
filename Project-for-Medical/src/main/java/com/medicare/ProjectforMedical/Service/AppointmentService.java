@@ -14,6 +14,7 @@ import com.medicare.ProjectforMedical.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.print.Doc;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +28,6 @@ public class AppointmentService {
 
     // create
     public void createAppointment(AppointmentRequest appointmentRequest,int userID,int docID){
-
         User user = userRepository.findById(userID).orElseThrow(()->new ResourceNotFoundException("User","ID",userID));
         Doctor doctor = doctorRepository.findById(docID).orElseThrow(()->new ResourceNotFoundException("Doctor","ID",docID));
         user.setDoctor(doctor);

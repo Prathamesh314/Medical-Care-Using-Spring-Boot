@@ -105,7 +105,7 @@ public class UserController {
         return "User has been deleted";
     }
 
-    @DeleteMapping("/{appointmentID}")
+    @DeleteMapping("/appointment/{appointmentID}")
     @ResponseStatus(HttpStatus.OK)
     public String deleteAppointment(@PathVariable Integer appointmentID){
         appointmentService.deleteAppointment(appointmentID);
