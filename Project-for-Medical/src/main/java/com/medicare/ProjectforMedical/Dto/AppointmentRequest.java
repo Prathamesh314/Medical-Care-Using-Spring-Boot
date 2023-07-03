@@ -11,4 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AppointmentRequest {
     private String reason;
+    private String email;
 }

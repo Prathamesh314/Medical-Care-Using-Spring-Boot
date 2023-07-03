@@ -26,6 +26,8 @@ public class AppointmentService {
     private  final UserRepository userRepository;
     private final DoctorRepository doctorRepository;
 
+    private final EmailService emailService;
+
     // create
     public void createAppointment(AppointmentRequest appointmentRequest,int userID,int docID){
         User user = userRepository.findById(userID).orElseThrow(()->new ResourceNotFoundException("User","ID",userID));
@@ -36,7 +38,9 @@ public class AppointmentService {
         appointment.setDate(new Date());
         appointment.setUser(user);
         appointment.setReason(appointmentRequest.getReason());
+        appointment.setEmail(appointment.getEmail());
         appointmentRepository.save(appointment);
+        emailService.sendMail("Appointment",appointmentRequest.getEmail(),user.getName(),appointmentRequest.getReason());
     }
 
     // get
@@ -50,6 +54,7 @@ public class AppointmentService {
                 .id(appointment.getId())
                 .reason(appointment.getReason())
                 .user(MapToUserResponse(appointment.getUser()))
+                .email(appointment.getEmail())
                 .date(appointment.getDate())
                 .build();
     }
@@ -81,6 +86,7 @@ public class AppointmentService {
     public void updateAppointment(AppointmentRequest appointmentRequest,int id){
         Appointment appointment = appointmentRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Appointment","ID",id));
         appointment.setReason(appointmentRequest.getReason());
+        appointment.setEmail(appointment.getEmail());
         appointment.setDate(new Date());
         appointmentRepository.save(appointment);
     }
