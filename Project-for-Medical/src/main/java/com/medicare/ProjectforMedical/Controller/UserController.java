@@ -33,10 +33,10 @@ public class UserController {
         return "User added successfully";
     }
 
-    @PostMapping("/{userID}/appointment")
+    @PostMapping("/{userID}/doctor/{doctorID}/appointment")
     @ResponseStatus(HttpStatus.OK)
-    public String addAppointment(@RequestBody AppointmentRequest appointmentRequest,@PathVariable Integer userID){
-        appointmentService.createAppointment(appointmentRequest,userID);
+    public String addAppointment(@RequestBody AppointmentRequest appointmentRequest,@PathVariable Integer userID,@PathVariable Integer doctorID){
+        appointmentService.createAppointment(appointmentRequest,userID,doctorID);
         return "Appointment created";
     }
 
@@ -47,7 +47,6 @@ public class UserController {
                 .address(userResponse.getAddress())
                 .age(userResponse.getAge())
                 .email(userResponse.getEmail())
-                .password(userResponse.getPassword())
                 .doctor(MapToDoctor(userResponse.getDoctor()))
                 .build();
     }

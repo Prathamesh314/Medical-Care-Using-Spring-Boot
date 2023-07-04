@@ -18,7 +18,6 @@ public class UserResponse {
     private String name;
     private String address;
     private String email;
-    private String password;
     private DoctorResponse doctor;
 //    private List<AppointmentResponse> appointments = new ArrayList<>();
 }

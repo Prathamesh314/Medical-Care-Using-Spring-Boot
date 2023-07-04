@@ -35,4 +35,6 @@ public class Doctor {
     private long experience;
     @OneToMany(mappedBy = "doctor")
     private Set<User> userList;
+    @OneToMany(mappedBy = "doctor")
+    List<Appointment> appointments;
 }

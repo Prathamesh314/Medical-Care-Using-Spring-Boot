@@ -25,6 +25,8 @@ public class Appointment {
     private String email;
     @ManyToOne
     private User user;
+    @ManyToOne
+    private Doctor doctor;
     private Date date;
 
 }

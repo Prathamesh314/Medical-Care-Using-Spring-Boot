@@ -27,7 +27,6 @@ public class UserService {
         User user = User.builder()
                 .name(userRequest.getName())
                 .address(userRequest.getAddress())
-                .password(userRequest.getPassword())
                 .email(userRequest.getEmail())
                 .age(userRequest.getAge())
                 .build();
@@ -75,19 +74,9 @@ public class UserService {
                 .name(user.getName())
                 .address(user.getAddress())
                 .email(user.getEmail())
-                .password(user.getPassword())
                 .age(user.getAge())
                 .build();
     }
 
-//    private DoctorResponse MapToDocResponse(Doctor doctor) {
-//        return DoctorResponse.builder()
-//                .id(doctor.getId())
-//                .name(doctor.getName())
-//                .image(doctor.getImage())
-//                .speciality(doctor.getSpeciality())
-//                .experience(doctor.getExperience())
-//                .build();
-//    }
 
 }

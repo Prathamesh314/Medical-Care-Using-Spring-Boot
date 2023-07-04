@@ -29,16 +29,16 @@ public class AppointmentService {
     private final EmailService emailService;
 
     // create
-    public void createAppointment(AppointmentRequest appointmentRequest,int userID){
+    public void createAppointment(AppointmentRequest appointmentRequest,int userID,int docID){
         User user = userRepository.findById(userID).orElseThrow(()->new ResourceNotFoundException("User","ID",userID));
-        Doctor doctor = doctorRepository.findByEmail(appointmentRequest.getEmail());
+        Doctor doctor = doctorRepository.findById(docID).orElseThrow(()->new ResourceNotFoundException("Doctor","ID",docID));
         user.setDoctor(doctor);
         userRepository.save(user);
         Appointment appointment = new Appointment();
         appointment.setDate(new Date());
         appointment.setUser(user);
         appointment.setReason(appointmentRequest.getReason());
-        appointment.setEmail(appointment.getEmail());
+        appointment.setEmail(appointmentRequest.getEmail());
         appointmentRepository.save(appointment);
         emailService.sendMail("Appointment",appointmentRequest.getEmail(),user.getName(),appointmentRequest.getReason());
     }
@@ -66,7 +66,6 @@ public class AppointmentService {
                 .address(user.getAddress())
                 .doctor(MapToDocResponse(user.getDoctor()))
                 .email(user.getEmail())
-                .password(user.getPassword())
                 .age(user.getAge())
                 .build();
     }
@@ -76,9 +75,15 @@ public class AppointmentService {
                 .id(doctor.getId())
                 .name(doctor.getName())
                 .image(doctor.getImage())
+                .email(doctor.getEmail())
                 .speciality(doctor.getSpeciality())
                 .experience(doctor.getExperience())
                 .build();
+    }
+
+    public List<AppointmentResponse> getAllAppointmentsByDoc(String email){
+        List<Appointment> appointments = appointmentRepository.findByEmail(email);
+        return appointments.stream().map(this::MapToAppResponse).toList();
     }
 
     // update
@@ -103,7 +108,6 @@ public class AppointmentService {
                 .name(user.getName())
                 .address(user.getAddress())
                 .email(user.getEmail())
-                .password(user.getPassword())
                 .age(user.getAge())
                 .build();
     }

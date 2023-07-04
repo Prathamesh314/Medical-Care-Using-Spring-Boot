@@ -72,7 +72,6 @@ public class DoctorService {
                 .name(doctor.getName())
                 .image(doctor.getImage())
                 .email(doctor.getEmail())
-                .password(doctor.getPassword())
                 .speciality(doctor.getSpeciality())
                 .experience(doctor.getExperience())
                 .build();

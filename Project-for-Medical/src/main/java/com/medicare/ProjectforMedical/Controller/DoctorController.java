@@ -3,6 +3,7 @@ package com.medicare.ProjectforMedical.Controller;
 import com.medicare.ProjectforMedical.Dto.AppointmentResponse;
 import com.medicare.ProjectforMedical.Dto.DoctorRequest;
 import com.medicare.ProjectforMedical.Dto.DoctorResponse;
+import com.medicare.ProjectforMedical.Model.Appointment;
 import com.medicare.ProjectforMedical.Model.Doctor;
 import com.medicare.ProjectforMedical.Service.AppointmentService;
 import com.medicare.ProjectforMedical.Service.DoctorService;
@@ -27,6 +28,8 @@ public class DoctorController {
 
     private final DoctorService doctorService;
     private final FileService fileService;
+
+    private final AppointmentService appointmentService;
 
     @Value("${project.image}")
     private String path;
@@ -83,6 +86,13 @@ public class DoctorController {
         InputStream resource = fileService.getResource(path,imageName);
         response.setContentType(MediaType.IMAGE_JPEG_VALUE);
         StreamUtils.copy(resource,response.getOutputStream());
+    }
+
+    @GetMapping("/{docID}/appointments")
+    @ResponseStatus(HttpStatus.OK)
+    public List<AppointmentResponse> getAllAppointments(@PathVariable Integer docID){
+        DoctorResponse doctorResponse = doctorService.findDocById(docID);
+        return appointmentService.getAllAppointmentsByDoc(doctorResponse.getEmail());
     }
 
     // put
