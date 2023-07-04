@@ -9,6 +9,7 @@ import com.medicare.ProjectforMedical.Service.AppointmentService;
 import com.medicare.ProjectforMedical.Service.DoctorService;
 import com.medicare.ProjectforMedical.Service.EmailService;
 import com.medicare.ProjectforMedical.Service.UserService;
+import com.medicare.ProjectforMedical.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,15 @@ public class UserController {
     public String addAppointment(@RequestBody AppointmentRequest appointmentRequest,@PathVariable Integer userID,@PathVariable Integer doctorID){
         appointmentService.createAppointment(appointmentRequest,userID,doctorID);
         return "Appointment created";
+    }
+
+    private User MapToNewUser(UserResponse userResponse){
+        return User.builder()
+                .name(userResponse.getName())
+                .address(userResponse.getAddress())
+                .age(userResponse.getAge())
+                .email(userResponse.getEmail())
+                .build();
     }
 
 

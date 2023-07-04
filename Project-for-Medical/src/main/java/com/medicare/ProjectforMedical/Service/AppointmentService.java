@@ -54,7 +54,6 @@ public class AppointmentService {
                 .id(appointment.getId())
                 .reason(appointment.getReason())
                 .user(MapToUserResponse(appointment.getUser()))
-                .email(appointment.getEmail())
                 .date(appointment.getDate())
                 .build();
     }

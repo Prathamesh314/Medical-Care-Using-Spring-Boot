@@ -15,7 +15,6 @@ import java.util.Date;
 public class AppointmentResponse {
     private int id;
     private String reason;
-    private String email;
     private UserResponse user;
     private Date date;
 }
