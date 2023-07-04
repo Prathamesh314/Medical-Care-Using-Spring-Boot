@@ -29,9 +29,9 @@ public class AppointmentService {
     private final EmailService emailService;
 
     // create
-    public void createAppointment(AppointmentRequest appointmentRequest,int userID,int docID){
+    public void createAppointment(AppointmentRequest appointmentRequest,int userID){
         User user = userRepository.findById(userID).orElseThrow(()->new ResourceNotFoundException("User","ID",userID));
-        Doctor doctor = doctorRepository.findById(docID).orElseThrow(()->new ResourceNotFoundException("Doctor","ID",docID));
+        Doctor doctor = doctorRepository.findByEmail(appointmentRequest.getEmail());
         user.setDoctor(doctor);
         userRepository.save(user);
         Appointment appointment = new Appointment();

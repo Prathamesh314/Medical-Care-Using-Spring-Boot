@@ -33,10 +33,10 @@ public class UserController {
         return "User added successfully";
     }
 
-    @PostMapping("/{userID}/doctor/{docID}/appointment")
+    @PostMapping("/{userID}/appointment")
     @ResponseStatus(HttpStatus.OK)
-    public String addAppointment(@RequestBody AppointmentRequest appointmentRequest,@PathVariable Integer docID,@PathVariable Integer userID){
-        appointmentService.createAppointment(appointmentRequest,userID,docID);
+    public String addAppointment(@RequestBody AppointmentRequest appointmentRequest,@PathVariable Integer userID){
+        appointmentService.createAppointment(appointmentRequest,userID);
         return "Appointment created";
     }
 

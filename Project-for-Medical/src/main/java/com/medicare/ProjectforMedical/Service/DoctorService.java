@@ -29,6 +29,8 @@ public class DoctorService {
                 .speciality(doctorRequest.getSpeciality())
                 .image(doctorRequest.getImage())
                 .experience(doctorRequest.getExperience())
+                .email(doctorRequest.getEmail())
+                .password(doctorRequest.getPassword())
                 .build();
 
         doctorRepository.save(doctor);
@@ -55,6 +57,8 @@ public class DoctorService {
         doctor.setImage(doctorRequest.getImage());
         doctor.setSpeciality(doctorRequest.getSpeciality());
         doctor.setExperience(doctorRequest.getExperience());
+        doctor.setEmail(doctorRequest.getEmail());
+        doctor.setPassword(doctorRequest.getPassword());
         doctorRepository.save(doctor);
     }
 
@@ -67,6 +71,8 @@ public class DoctorService {
                 .id(doctor.getId())
                 .name(doctor.getName())
                 .image(doctor.getImage())
+                .email(doctor.getEmail())
+                .password(doctor.getPassword())
                 .speciality(doctor.getSpeciality())
                 .experience(doctor.getExperience())
                 .build();

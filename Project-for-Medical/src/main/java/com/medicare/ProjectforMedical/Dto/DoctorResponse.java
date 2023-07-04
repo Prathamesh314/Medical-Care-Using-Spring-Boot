@@ -18,6 +18,8 @@ import java.util.Set;
 public class DoctorResponse {
     private int id;
     private String name;
+    private String email;
+    private String password;
     private String image;
     private String speciality;
     private long experience;

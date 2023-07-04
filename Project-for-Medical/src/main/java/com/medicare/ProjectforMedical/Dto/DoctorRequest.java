@@ -13,6 +13,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class DoctorRequest {
     private String name;
+    private String email;
+    private String password;
     private String image;
     private String speciality;
     private long experience;
