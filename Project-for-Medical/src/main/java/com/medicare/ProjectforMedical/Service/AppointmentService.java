@@ -40,7 +40,7 @@ public class AppointmentService {
         appointment.setReason(appointmentRequest.getReason());
         appointment.setEmail(appointmentRequest.getEmail());
         appointmentRepository.save(appointment);
-        emailService.sendMail("Appointment",appointmentRequest.getEmail(),user.getName(),appointmentRequest.getReason());
+        emailService.sendMail(user,doctor,appointmentRequest.getReason());
     }
 
     // get

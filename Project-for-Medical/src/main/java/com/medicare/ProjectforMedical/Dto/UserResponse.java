@@ -16,6 +16,7 @@ public class UserResponse {
     private int id;
     private int age;
     private String name;
+    private int mobNo;
     private String address;
     private String email;
     private DoctorResponse doctor;

@@ -26,6 +26,7 @@ public class UserService {
     public void addUser(UserRequest userRequest){
         User user = User.builder()
                 .name(userRequest.getName())
+                .mobNo(userRequest.getMobNo())
                 .address(userRequest.getAddress())
                 .email(userRequest.getEmail())
                 .age(userRequest.getAge())
@@ -57,6 +58,7 @@ public class UserService {
     public void updateUser(UserRequest userRequest,Integer id){
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User","ID",id));
         user.setName(userRequest.getName());
+        user.setMobNo(userRequest.getMobNo());
         user.setAge(userRequest.getAge());
         user.setAddress(userRequest.getAddress());
         user.setEmail(userRequest.getEmail());
@@ -72,11 +74,11 @@ public class UserService {
         return UserResponse.builder()
                 .id(user.getId())
                 .name(user.getName())
+                .mobNo(user.getMobNo())
                 .address(user.getAddress())
                 .email(user.getEmail())
                 .age(user.getAge())
                 .build();
     }
-
 
 }

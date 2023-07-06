@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class UserRequest {
     private int age;
     private String name;
+    private int mobNo;
     private String address;
     private String email;
     private String password;
