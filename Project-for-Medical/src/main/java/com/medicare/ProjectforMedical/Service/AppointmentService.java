@@ -62,6 +62,7 @@ public class AppointmentService {
         return UserResponse.builder()
                 .id(user.getId())
                 .name(user.getName())
+                .mobNo(user.getMobNo())
                 .address(user.getAddress())
                 .doctor(MapToDocResponse(user.getDoctor()))
                 .email(user.getEmail())
