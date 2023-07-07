@@ -1,7 +1,5 @@
 # Medical-Care
 
-## Under Progress
-
 ### About
 
 ##### This basically helps people to manage their medicines and appointment with doctor
@@ -13,3 +11,15 @@
 3. ###### Information of Doctor, like which doctor recommended which medicine
 
 ###### You can also upload an image of medicine from your device or online, so that if want to go purchase a new one, then it will be easy for people to buy correct medicine
+
+
+### How to setup and run at your machine
+
+1. ###### You need to setup docker environment on your computer so follow following instructions :-
+   ```
+   cd Project-for-Medical
+   docker composer up -d
+   ```
+2. ###### Now PHPMYADMIN is running on localhost:8080, now open your browser and [go to this link](http://localhost:8080)
+     1. ###### Now when your PHPMYADMIN is running, create a new table **"mlhDatabase"**
+3. ###### Now your application is ready to run
