@@ -9,6 +9,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @SpringBootApplication
 public class ProjectForMedicalApplication {
 
+
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectForMedicalApplication.class, args);
 	}

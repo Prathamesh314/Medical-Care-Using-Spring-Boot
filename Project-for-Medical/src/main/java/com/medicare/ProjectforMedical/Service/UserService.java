@@ -1,17 +1,13 @@
 package com.medicare.ProjectforMedical.Service;
 
-import com.medicare.ProjectforMedical.Dto.DoctorResponse;
 import com.medicare.ProjectforMedical.Dto.UserRequest;
 import com.medicare.ProjectforMedical.Dto.UserResponse;
 import com.medicare.ProjectforMedical.Model.Doctor;
-import com.medicare.ProjectforMedical.Model.Medicine;
 import com.medicare.ProjectforMedical.Model.User;
 import com.medicare.ProjectforMedical.Repository.DoctorRepository;
-import com.medicare.ProjectforMedical.Repository.MedicineRepository;
 import com.medicare.ProjectforMedical.Repository.UserRepository;
 import com.medicare.ProjectforMedical.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.id.IntegralDataTypeHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +25,7 @@ public class UserService {
                 .mobNo(userRequest.getMobNo())
                 .address(userRequest.getAddress())
                 .email(userRequest.getEmail())
+                .password(userRequest.getPassword())
                 .age(userRequest.getAge())
                 .build();
         userRepository.save(user);
@@ -36,7 +33,7 @@ public class UserService {
     
 
     public UserResponse findByEmail(String email){
-        User user = userRepository.findByEmail(email);
+        User user = userRepository.findByEmail(email).orElseThrow(()->new ResourceNotFoundException("User","Email"+email,0));
         return MapToResponse(user);
     }
 
@@ -77,6 +74,7 @@ public class UserService {
                 .mobNo(user.getMobNo())
                 .address(user.getAddress())
                 .email(user.getEmail())
+                .password(user.getPassword())
                 .age(user.getAge())
                 .build();
     }
