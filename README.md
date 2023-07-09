@@ -23,3 +23,4 @@
 2. Now PHPMYADMIN is running on localhost:8080, now open your browser and [go to this link](http://localhost:8080)
      1. Now when your PHPMYADMIN is running, create a new table **"mlhDatabase"**
 3. Now your application is ready to run
+4. To test APIs, open Postman and test them but you need authentication before testing it, so in basic authentication, provide username="prathamesh", password="prathamesh", it will generate a token and use that token to access all APIs
