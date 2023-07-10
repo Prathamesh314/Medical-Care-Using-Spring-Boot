@@ -14,6 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
@@ -33,13 +35,20 @@ public class SecurityConfig {
     }
 
     @Bean
-    public InMemoryUserDetailsManager user(){
-        return new InMemoryUserDetailsManager(
-                User.withUsername("prathamesh")
-                        .password("{noop}prathamesh")
-                        .authorities("read")
-                        .build()
-        );
+    public UserDetailsService userDetailsService(){
+        UserDetails admin = User.builder()
+                .username("Prathamesh")
+                .password("12345678")
+                .roles("ADMIN")
+                .build();
+
+        UserDetails user = User.builder()
+                .username("John")
+                .password("12345678")
+                .roles("USER")
+                .build();
+
+        return new InMemoryUserDetailsManager(admin,user);
     }
 
     @Bean
