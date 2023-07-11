@@ -1,17 +1,15 @@
 package com.medicare.ProjectforMedical.Controller;
 
 import com.medicare.ProjectforMedical.Dto.*;
-import com.medicare.ProjectforMedical.Model.Appointment;
 import com.medicare.ProjectforMedical.Model.Doctor;
 import com.medicare.ProjectforMedical.Model.User;
 import com.medicare.ProjectforMedical.Repository.UserRepository;
 import com.medicare.ProjectforMedical.Service.AppointmentService;
 import com.medicare.ProjectforMedical.Service.DoctorService;
-import com.medicare.ProjectforMedical.Service.EmailService;
 import com.medicare.ProjectforMedical.Service.UserService;
-import com.medicare.ProjectforMedical.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -73,13 +71,15 @@ public class UserController {
     }
 
     // get
-    @GetMapping("/")
+    @GetMapping("/all")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN)")
     @ResponseStatus(HttpStatus.OK)
     public List<UserResponse> getAllUsers(){
         return userService.getAllUsers();
     }
 
     @GetMapping("/{userID}")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @ResponseStatus(HttpStatus.OK)
     public UserResponse getUserByID(@PathVariable Integer userID){
         return userService.getUserById(userID);
