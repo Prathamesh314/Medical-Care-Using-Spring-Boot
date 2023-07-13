@@ -1,83 +1,16 @@
 package com.medicare.ProjectforMedical.config;
 
-import com.nimbusds.jose.jwk.JWK;
-import com.nimbusds.jose.jwk.JWKSet;
-import com.nimbusds.jose.jwk.RSAKey;
-import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
-import com.nimbusds.jose.jwk.source.JWKSource;
-import com.nimbusds.jose.proc.SecurityContext;
-import org.springframework.context.annotation.Bean;
+import com.medicare.ProjectforMedical.security.AuthenticationFilter;
+import com.medicare.ProjectforMedical.security.JWTAuthenticationEntryPoint;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
-@EnableMethodSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final JWTAuthenticationEntryPoint entryPoint;
 
-    private final RSAKeyProperties rsaKeyProperties;
-
-    public SecurityConfig(RSAKeyProperties rsaKeyProperties) {
-        this.rsaKeyProperties = rsaKeyProperties;
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService(){
-        UserDetails admin = User.builder()
-                .username("Prathamesh")
-                .password(encoder().encode("12345678"))
-                .roles("ADMIN")
-                .build();
-
-        UserDetails user = User.builder()
-                .username("John")
-                .password(encoder().encode("87654321"))
-                .roles("USER")
-                .build();
-
-        return new InMemoryUserDetailsManager(admin,user);
-    }
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .csrf(csrf->csrf.disable())
-                .authorizeHttpRequests()
-                .requestMatchers("/api/").permitAll()
-                .and().authorizeHttpRequests().requestMatchers("/api/user/all").authenticated()
-                .and().formLogin().and().build();
-    }
-
-
-    @Bean
-    JwtDecoder jwtDecoder(){
-        return NimbusJwtDecoder.withPublicKey(rsaKeyProperties.publicKey()).build();
-    }
-
-    @Bean
-    JwtEncoder jwtEncoder(){
-        JWK jwk = new RSAKey.Builder(rsaKeyProperties.publicKey()).privateKey(rsaKeyProperties.privateKey()).build();
-        JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
-        return new NimbusJwtEncoder(jwks);
-    }
-
-    @Bean
-    public PasswordEncoder encoder(){
-        return new BCryptPasswordEncoder();
-    }
+    private final AuthenticationFilter filter;
 
 }

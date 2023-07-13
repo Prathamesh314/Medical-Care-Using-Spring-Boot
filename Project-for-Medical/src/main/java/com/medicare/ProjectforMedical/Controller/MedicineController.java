@@ -2,7 +2,6 @@ package com.medicare.ProjectforMedical.Controller;
 
 import com.medicare.ProjectforMedical.Dto.MedicineRequest;
 import com.medicare.ProjectforMedical.Dto.MedicineResponse;
-import com.medicare.ProjectforMedical.Repository.MedicineRepository;
 import com.medicare.ProjectforMedical.Service.FileService;
 import com.medicare.ProjectforMedical.Service.MedicineService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -118,3 +116,5 @@ public class MedicineController {
     }
 
 }
+
+

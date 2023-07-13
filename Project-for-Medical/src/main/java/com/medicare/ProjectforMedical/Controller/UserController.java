@@ -72,15 +72,15 @@ public class UserController {
 
     // get
     @GetMapping("/all")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN)")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAuthority('ROLE_ADMIN)")
     public List<UserResponse> getAllUsers(){
         return userService.getAllUsers();
     }
 
     @GetMapping("/{userID}")
-    @PreAuthorize("hasAuthority('ROLE_USER')")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     public UserResponse getUserByID(@PathVariable Integer userID){
         return userService.getUserById(userID);
     }

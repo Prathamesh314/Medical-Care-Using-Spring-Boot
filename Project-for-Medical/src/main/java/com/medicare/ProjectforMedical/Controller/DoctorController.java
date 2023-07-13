@@ -3,8 +3,6 @@ package com.medicare.ProjectforMedical.Controller;
 import com.medicare.ProjectforMedical.Dto.AppointmentResponse;
 import com.medicare.ProjectforMedical.Dto.DoctorRequest;
 import com.medicare.ProjectforMedical.Dto.DoctorResponse;
-import com.medicare.ProjectforMedical.Model.Appointment;
-import com.medicare.ProjectforMedical.Model.Doctor;
 import com.medicare.ProjectforMedical.Service.AppointmentService;
 import com.medicare.ProjectforMedical.Service.DoctorService;
 import com.medicare.ProjectforMedical.Service.FileService;
@@ -35,7 +33,7 @@ public class DoctorController {
     private String path;
 
     // create
-    @PostMapping("/")
+    @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public String createDoctor(@RequestBody DoctorRequest doctorRequest){
         doctorService.createDoc(doctorRequest);

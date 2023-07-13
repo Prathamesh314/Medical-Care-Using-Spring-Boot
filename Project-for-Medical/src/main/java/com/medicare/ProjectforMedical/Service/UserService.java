@@ -8,6 +8,7 @@ import com.medicare.ProjectforMedical.Repository.DoctorRepository;
 import com.medicare.ProjectforMedical.Repository.UserRepository;
 import com.medicare.ProjectforMedical.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,13 +20,16 @@ public class UserService {
     private final UserRepository userRepository;
     private final DoctorRepository doctorRepository;
 
+    private final PasswordEncoder encoder;
+
     public void addUser(UserRequest userRequest){
         User user = User.builder()
                 .name(userRequest.getName())
                 .mobNo(userRequest.getMobNo())
                 .address(userRequest.getAddress())
                 .email(userRequest.getEmail())
-                .password(userRequest.getPassword())
+                .password(encoder.encode(userRequest.getPassword()))
+                .roles(userRequest.getRoles())
                 .age(userRequest.getAge())
                 .build();
         userRepository.save(user);
@@ -60,6 +64,7 @@ public class UserService {
         user.setAddress(userRequest.getAddress());
         user.setEmail(userRequest.getEmail());
         user.setPassword(userRequest.getPassword());
+        user.setRoles(userRequest.getRoles());
         userRepository.save(user);
     }
 
@@ -76,6 +81,7 @@ public class UserService {
                 .email(user.getEmail())
                 .password(user.getPassword())
                 .age(user.getAge())
+                .role(user.getRoles())
                 .build();
     }
 
