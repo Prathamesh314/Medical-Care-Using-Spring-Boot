@@ -1,25 +1,25 @@
-package com.medicare.ProjectforMedical.config;
+package com.medicare.ProjectforMedical.Service;
+
 
 import com.medicare.ProjectforMedical.Model.User;
 import com.medicare.ProjectforMedical.Repository.UserRepository;
+import com.medicare.ProjectforMedical.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
-@Component
+@Service
 @RequiredArgsConstructor
-public class UserInfoUserDetailsService implements UserDetailsService {
+public class CustomUserDetailService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private  UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByEmail(username);
-        return user.map(UserInfoUserDetails::new)
-                .orElseThrow(()->new UsernameNotFoundException("User not found with username "+username));
+        User user = userRepository.findByEmail(username).orElseThrow(() -> new ResourceNotFoundException("User", "email " + username, 0));
+
+        return user;
     }
 }
