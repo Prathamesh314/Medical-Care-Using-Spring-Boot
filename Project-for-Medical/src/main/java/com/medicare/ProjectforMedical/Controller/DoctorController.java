@@ -33,12 +33,12 @@ public class DoctorController {
     private String path;
 
     // create
-    @PostMapping("/add")
-    @ResponseStatus(HttpStatus.CREATED)
-    public String createDoctor(@RequestBody DoctorRequest doctorRequest){
-        doctorService.createDoc(doctorRequest);
-        return "Doctor is created";
-    }
+//    @PostMapping("/add")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public String createDoctor(@RequestBody DoctorRequest doctorRequest){
+//        doctorService.createDoc(doctorRequest);
+//        return "Doctor is created";
+//    }
 
     @PostMapping("/image/upload/{docID}")
     public DoctorResponse uploadImage(

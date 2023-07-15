@@ -15,12 +15,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService{
 
     private final UserRepository userRepository;
     private final DoctorRepository doctorRepository;
 
     private final PasswordEncoder encoder;
+
 
     public void addUser(UserRequest userRequest){
         User user = User.builder()
@@ -29,7 +30,6 @@ public class UserService {
                 .address(userRequest.getAddress())
                 .email(userRequest.getEmail())
                 .password(encoder.encode(userRequest.getPassword()))
-                .roles(userRequest.getRoles())
                 .age(userRequest.getAge())
                 .build();
         userRepository.save(user);
@@ -64,7 +64,6 @@ public class UserService {
         user.setAddress(userRequest.getAddress());
         user.setEmail(userRequest.getEmail());
         user.setPassword(userRequest.getPassword());
-        user.setRoles(userRequest.getRoles());
         userRepository.save(user);
     }
 
@@ -79,9 +78,7 @@ public class UserService {
                 .mobNo(user.getMobNo())
                 .address(user.getAddress())
                 .email(user.getEmail())
-                .password(user.getPassword())
                 .age(user.getAge())
-                .role(user.getRoles())
                 .build();
     }
 

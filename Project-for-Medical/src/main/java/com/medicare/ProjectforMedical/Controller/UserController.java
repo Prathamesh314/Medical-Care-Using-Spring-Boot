@@ -9,13 +9,13 @@ import com.medicare.ProjectforMedical.Service.DoctorService;
 import com.medicare.ProjectforMedical.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
+@CrossOrigin("*")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -25,12 +25,12 @@ public class UserController {
     private final AppointmentService appointmentService;
 
 
-    @PostMapping("/add")
-    @ResponseStatus(HttpStatus.CREATED)
-    public String addUser(@RequestBody UserRequest userRequest){
-        userService.addUser(userRequest);
-        return "User added successfully";
-    }
+//    @PostMapping("/add")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public String addUser(@RequestBody UserRequest userRequest){
+//        userService.addUser(userRequest);
+//        return "User added successfully";
+//    }
 
     @PostMapping("/{userID}/doctor/{doctorID}/appointment")
     @ResponseStatus(HttpStatus.OK)
@@ -73,14 +73,12 @@ public class UserController {
     // get
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAuthority('ROLE_ADMIN)")
     public List<UserResponse> getAllUsers(){
         return userService.getAllUsers();
     }
 
     @GetMapping("/{userID}")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAuthority('ROLE_USER')")
     public UserResponse getUserByID(@PathVariable Integer userID){
         return userService.getUserById(userID);
     }

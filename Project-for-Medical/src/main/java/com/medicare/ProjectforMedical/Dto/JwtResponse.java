@@ -1,5 +1,4 @@
-package com.medicare.ProjectforMedical.Model;
-
+package com.medicare.ProjectforMedical.Dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,9 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class JwtRequest {
+public class JwtResponse {
 
-    private String email;
-    private String password;
+    private String jwtToken;
+    private String username;
 
 }

@@ -29,7 +29,6 @@ public class User implements UserDetails {
     @NotBlank
     @Size(min = 3,max = 12,message = "Name should be of 3-12 characters")
     private String name;
-    private String roles;
     private int mobNo;
     private String address;
     @Email
@@ -51,6 +50,9 @@ public class User implements UserDetails {
     public String getUsername() {
         return this.email;
     }
+
+    @Override
+    public String getPassword(){return this.password;}
 
     @Override
     public boolean isAccountNonExpired() {
