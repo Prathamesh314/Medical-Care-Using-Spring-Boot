@@ -18,7 +18,7 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Doctor {
+public class Doctor{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
